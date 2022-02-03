@@ -1,6 +1,6 @@
 // Hold application secret and configurations
 module.exports = {
-	mongoURI: 'mongodb://localhost:27017/test',
+	mongoURI: 'mongodb+srv://ganesh:M7gydcURmm4iamJ@cluster0.9j6go.mongodb.net/netmeds-backend?retryWrites=true&w=majority',
 	SECRET_KEY: 'ReactNetmedsClone',
 	JWT_EXPIRE: '12h'
 };
