@@ -31,7 +31,7 @@ require('./src/routes/userRoutes')(app);
 require('./src/routes/authRoutes')(app);
 
 // Setup Server
-const port = process.env.PORT || 8080;
+const port = 8080;
 const server = http.createServer(app);
 
 server.listen(port, "0.0.0.0");
