@@ -6,6 +6,13 @@ const keys = require('../../config/keys');
 
 // Register a User
 exports.register = async (req, res) => {
+
+    const user = await User.findOne({ email: req.body.email });
+
+    if (user) {
+        return res.status(400).send("User already exists!")
+    }
+
     const newUser = new User({
         username: req.body.username,
         email: req.body.email,
