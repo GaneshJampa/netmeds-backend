@@ -9,7 +9,9 @@ exports.register = async (req, res) => {
 
     const user = await User.findOne({ email: req.body.email });
 
-    if (user) {
+    const user2 = await User.findOne({ email: req.body.username });
+
+    if (user || user2) {
         return res.status(400).send("User already exists!")
     }
 
@@ -37,7 +39,7 @@ exports.login = async (req, res) => {
         const user = await User.findOne({ email: req.body.email });
 
         if (!user) {
-            return res.status(422).send("Wrong password or email!")
+            return res.status(400).send("Invalid Credentials!")
         }
 
         // decrypt the password to match with db password
@@ -45,7 +47,7 @@ exports.login = async (req, res) => {
         var originalPassword = bytes.toString(CryptoJS.enc.Utf8)
 
         if (originalPassword !== req.body.password) {
-            return res.status(422).json("Wrong password or email2!");
+            return res.status(400).json("Invalid Credentials!");
         }
 
         // hide this info inside token id and isAdmin and signIn expires in 5d
