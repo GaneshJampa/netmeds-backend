@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Order = mongoose.model('Order');
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const keys = require('../../config/keys');
@@ -7,11 +8,11 @@ const keys = require('../../config/keys');
 // Register a User
 exports.register = async (req, res) => {
 
-    const user = await User.findOne({ email: req.body.email });
+    const useremail = await User.findOne({ email: req.body.email });
 
-    const user2 = await User.findOne({ email: req.body.username });
+    const username = await User.findOne({ email: req.body.username });
 
-    if (user || user2) {
+    if (useremail || username) {
         return res.status(400).send("User already exists!")
     }
 
@@ -66,3 +67,23 @@ exports.login = async (req, res) => {
         return res.status(422).send(err);
     }
 };
+
+
+// user orders
+exports.orders = function(req, res, next) {
+    console.log(req.params.id)
+    // Find category
+    User.findOne({ _id: req.params.id })
+    .then(user => {
+      Order.find({ user: user }, function(error, orders) {
+        if(error) {
+          res.status(422).send({ error: 'Unable to fetch orders '})
+        } else {
+          res.status(200).send(orders)
+        }
+      })  
+    })
+    .catch(error => {
+      return res.status(400).send({ error: 'Unable to find this user' });
+    })
+  }

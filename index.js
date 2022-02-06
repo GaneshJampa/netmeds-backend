@@ -12,6 +12,7 @@ require('./src/models/Product');
 require('./src/models/Category');
 require('./src/models/Banner');
 require('./src/models/User');
+require('./src/models/Order');
 // Setup DB
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
@@ -29,6 +30,7 @@ require('./src/routes/categoryRoutes')(app);
 require('./src/routes/bannerRoutes')(app);
 require('./src/routes/userRoutes')(app);
 require('./src/routes/authRoutes')(app);
+require('./src/routes/orderRoutes')(app);
 
 // Setup Server
 const port = process.env.PORT || 8080;

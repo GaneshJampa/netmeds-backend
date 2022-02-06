@@ -20,9 +20,9 @@ const userSchema = new Schema({
         required: [true, "Please enter your password"],
     },
 
-    loggedIn: {
+    isAdmin: {
         type: Boolean,
-        default: true
+        default: false
     },
 
     createdAt: { type: Date, default: Date.now },
