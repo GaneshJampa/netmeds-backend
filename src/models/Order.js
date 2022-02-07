@@ -52,7 +52,6 @@ const orderSchema = new Schema({
     }],
     status: {
         type: String,
-        required: true,
         default: "pending",
     },
     total: {
@@ -64,6 +63,10 @@ const orderSchema = new Schema({
         default: "Cash on Delivery"
     },
     address: {
+        mobilenumber: {
+            type: Number,
+            required: true
+        },
         housenumber: {
             type: String,
             required: true
